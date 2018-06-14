@@ -45,8 +45,9 @@ public class TransferServiceImpl implements TransferService {
 			// Fund transfer
 			Transfer transfer = new Transfer();
 			transfer.setFromAccount(fromAccount);
-			transfer.setFromAccount(toAccount);
+			transfer.setToAccount(toAccount);
 			transfer.setAmount(request.getAmount());
+			transfer.setStatus(0);
 			// Reduce amount from the account balance
 			long debitedBalance = fromAccount.getBalance() - amountToTransfer;
 			long creditedBalance = toAccount.getBalance() + amountToTransfer;
@@ -73,10 +74,11 @@ public class TransferServiceImpl implements TransferService {
 			message = "To account is invalid";
 		} else if(!isFromAccountActive) {
 			message = "From account is invalid";
-		} else if(fromAccount.getBalance() >= amountToTransfer) {
+		} else if(fromAccount.getBalance() < amountToTransfer) {
 			message = "Account has insufficient balance";
 		}
-		return message == null;
+		boolean isValid = message==null;
+		return isValid;
 	}
 
 }

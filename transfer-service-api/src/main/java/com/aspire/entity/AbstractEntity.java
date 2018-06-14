@@ -33,7 +33,7 @@ public class AbstractEntity {
 	
 	@Column(name = "status")
 	private int status;
-
+	
 	public String getId() {
 		return id;
 	}

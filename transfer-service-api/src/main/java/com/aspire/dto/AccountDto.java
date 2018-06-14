@@ -33,4 +33,12 @@ public class AccountDto extends BaseResponse {
 	public void setTransactions(List<Transaction> transactions) {
 		this.transactions = transactions;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }

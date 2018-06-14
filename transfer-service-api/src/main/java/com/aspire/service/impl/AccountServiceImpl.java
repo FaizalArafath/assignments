@@ -3,7 +3,10 @@
  */
 package com.aspire.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.aspire.common.AccountStatus;
@@ -27,14 +30,21 @@ public class AccountServiceImpl implements AccountService {
 	
 	@Override
 	public AccountCreationResponse create(AccountCreationRequest request) {
-		Account account = new Account();
+		//validation to check the account name is already exist in the system
+		List<Account> accounts = accountRepository.fetchAccountNameAndType(request.getName(), request.getType());
 		AccountCreationResponse response = new AccountCreationResponse();
-		account.setBalance(request.getAmount());
-		account.setName(request.getName());
-		account.setType(request.getType().getValue());
-		account.setStatus(AccountStatus.ACTIVE.getValue());
-		accountRepository.save(account);
-		response.setAccountId(account.getId());
+		if(accounts == null) {
+			Account account = new Account();
+			account.setBalance(request.getAmount());
+			account.setName(request.getName());
+			account.setType(request.getType().getValue());
+			account.setStatus(AccountStatus.ACTIVE.getValue());
+			accountRepository.save(account);
+			response.setAccountId(account.getId());	
+		} else {
+			response.setMessage("Account Name and Type already exist!!");
+		}
+		
 		return response;
 	}
 
@@ -50,6 +60,7 @@ public class AccountServiceImpl implements AccountService {
 		AccountDto accountDto = new AccountDto();
 		accountDto.setAccountId(account.getId());
 		accountDto.setBalance(account.getBalance());
+		accountDto.setName(account.getName());
 		//TODO get all transaction for this account. not in scope for now. 
 		
 		return accountDto;
