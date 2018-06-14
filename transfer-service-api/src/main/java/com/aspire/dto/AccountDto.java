@@ -4,6 +4,16 @@ import java.util.List;
 
 import javax.transaction.Transaction;
 
+/**
+ * This class object is used across the place where user fetch or update account
+ * information. Fetch request will fetch account information from db and
+ * construct AccountDto to return response. Similarly update request will expect
+ * the same accountDto object, update service will get details from the dto and
+ * update to db.
+ * 
+ * @author faizal.arafath
+ *
+ */
 public class AccountDto extends BaseResponse {
 	private String accountId;
 	private String name;

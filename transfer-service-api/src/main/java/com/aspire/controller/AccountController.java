@@ -27,44 +27,87 @@ import com.aspire.service.AccountService;
 @RestController
 @RequestMapping("/accounts")
 public class AccountController {
-	
+
 	/**
 	 * 
 	 */
 	@Autowired
 	private AccountService accountService;
 
+	/**
+	 * Method to create Account. It requires AccountCreationRequest object as
+	 * parameter with required details to create account.
+	 * 
+	 * @param request
+	 * @return ResponseEntity of type AccountCreationResponse
+	 */
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<AccountCreationResponse> create(@RequestBody AccountCreationRequest request) {
+	public ResponseEntity<AccountCreationResponse> create(
+			@RequestBody AccountCreationRequest request) {
 		AccountCreationResponse response = accountService.create(request);
-		return new ResponseEntity<AccountCreationResponse>(response, HttpStatus.CREATED);
+		return new ResponseEntity<AccountCreationResponse>(response,
+				HttpStatus.CREATED);
 	}
 
+	/**
+	 * Method to activate the account. Usually activation URL will be called
+	 * from account activation mail.
+	 * 
+	 * @param accountId
+	 * @return ResponseEntity of type BaseResponse
+	 */
 	@RequestMapping(value = "/activate/{accountId}", method = RequestMethod.PUT)
 	public ResponseEntity<BaseResponse> activate(@PathVariable String accountId) {
 		BaseResponse response = accountService.activate(accountId);
 		return new ResponseEntity<BaseResponse>(response, HttpStatus.OK);
 	}
 
+	/**
+	 * This method is used to update the account informations. For now API has
+	 * ability to update only the account balance. All other information like
+	 * account name, account id cannot be changed once created.
+	 * 
+	 * @param request
+	 * @return ResponseEntity of type BaseResponse
+	 */
 	@RequestMapping(method = RequestMethod.PUT)
 	public ResponseEntity<BaseResponse> update(@RequestBody AccountDto request) {
 		BaseResponse response = accountService.update(request);
 		return new ResponseEntity<BaseResponse>(response, HttpStatus.OK);
 	}
 
+	/**
+	 * Method to fetch account information. It require accountId to be passed.
+	 * This method is also capable of returning all associated transactions
+	 * details for the account. For now only the skeleton has been made and
+	 * transaction will not be return back to the response.
+	 * 
+	 * @param accountId
+	 * @return ResponseEntity of type AccountDto
+	 */
 	@RequestMapping(value = "/{accountId}", method = RequestMethod.GET)
 	public ResponseEntity<AccountDto> fetch(@PathVariable String accountId) {
 		AccountDto accountDto = accountService.fetch(accountId);
 		return new ResponseEntity<AccountDto>(accountDto, HttpStatus.OK);
 	}
 
+	/**
+	 * Method to delete the account. It requires account id to be passed. Once
+	 * the account is deleted user will be able to transfer or view account
+	 * details.
+	 * 
+	 * @param accountId
+	 * @return ResponseEntity of type BaseResponse
+	 */
 	@RequestMapping(value = "/delete/{accountId}", method = RequestMethod.DELETE)
 	public ResponseEntity<BaseResponse> delete(@PathVariable String accountId) {
 		AccountDto account = accountService.fetch(accountId);
 		if (account == null) {
 			BaseResponse baseResponse = new BaseResponse();
-			baseResponse.setMessage("Unable to delete. Account with id " + accountId + " not found.");
-			return new ResponseEntity<BaseResponse>(baseResponse, HttpStatus.NOT_FOUND);
+			baseResponse.setMessage("Unable to delete. Account with id "
+					+ accountId + " not found.");
+			return new ResponseEntity<BaseResponse>(baseResponse,
+					HttpStatus.NOT_FOUND);
 		}
 		accountService.delete(accountId);
 		return new ResponseEntity<BaseResponse>(HttpStatus.NO_CONTENT);

@@ -8,8 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
+ * Entity class for the table account.
+ * 
  * @author faizal.arafath
- *
  */
 
 @Entity
@@ -18,10 +19,10 @@ public class Account extends AbstractEntity {
 
 	@Column(name = "name")
 	private String name;
-	
+
 	@Column(name = "type")
 	private int type;
-	
+
 	@Column(name = "balance")
 	private long balance;
 
@@ -32,7 +33,7 @@ public class Account extends AbstractEntity {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public long getBalance() {
 		return balance;
 	}
@@ -48,7 +49,5 @@ public class Account extends AbstractEntity {
 	public void setType(int type) {
 		this.type = type;
 	}
-	
-	
 
 }

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.aspire.entity;
 
 import java.util.Date;
@@ -12,6 +9,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
+ * Entity class for the table transfer. This entity has many to one relation
+ * with account table. One account can have many transactions. 
+ * 
  * @author faizal.arafath
  *
  */
@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "transfer")
 public class Transfer extends AbstractEntity {
-	
+
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "from_account")
 	private Account fromAccount;
@@ -76,7 +76,5 @@ public class Transfer extends AbstractEntity {
 	public void setError(String error) {
 		this.error = error;
 	}
-	
-	
 
 }

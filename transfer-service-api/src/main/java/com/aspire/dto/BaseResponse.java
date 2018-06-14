@@ -1,7 +1,15 @@
 package com.aspire.dto;
 
+/**
+ * This class is abstract response class. Default response attributes like
+ * statusCode and messages will be enclosed in this object. This class will be
+ * extend if response are of different type.
+ * 
+ * @author faizal.arafath
+ *
+ */
 public class BaseResponse {
-	
+
 	private int statusCode;
 	private String message;
 

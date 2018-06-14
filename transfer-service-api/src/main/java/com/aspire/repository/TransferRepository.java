@@ -1,13 +1,15 @@
-/**
- * 
- */
 package com.aspire.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.aspire.entity.Transfer;;
+import com.aspire.entity.Transfer;
+
+;
 
 /**
+ * Transfer Repository is responsible for dealing with all transfer related db
+ * operations.
+ * 
  * @author faizal.arafath
  *
  */

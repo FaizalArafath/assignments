@@ -2,6 +2,13 @@ package com.aspire.dto;
 
 import java.util.Date;
 
+/**
+ * TransactionDto is used to transfer data from controller to service. Object
+ * holds required attributes to transfer amount from one account to another.
+ * 
+ * @author faizal.arafath
+ *
+ */
 public class TransactionDto {
 
 	private String fromAccount;
