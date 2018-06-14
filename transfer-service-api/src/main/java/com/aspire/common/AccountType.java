@@ -4,6 +4,9 @@
 package com.aspire.common;
 
 /**
+ * Enum to holds account type. This will also gives integer value of the
+ * account type.
+ * 
  * @author faizal.arafath
  *
  */

@@ -4,6 +4,9 @@
 package com.aspire.common;
 
 /**
+ * Enum to holds status of Transfer. Each transaction will be having its own
+ * status. This will also gives integer value of the transfer.
+ * 
  * @author faizal.arafath
  *
  */

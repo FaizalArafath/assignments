@@ -15,10 +15,22 @@ import com.aspire.dto.AccountDto;
 import com.aspire.dto.BaseResponse;
 import com.aspire.service.AccountService;
 
+/**
+ * End point which controls all requests which are related to account. Account
+ * controller will call appropriate service and get the result back as response.
+ * Response will have response code, message if something has to be return back
+ * and requested result set.
+ * 
+ * @author faizal.arafath
+ *
+ */
 @RestController
 @RequestMapping("/accounts")
 public class AccountController {
-
+	
+	/**
+	 * 
+	 */
 	@Autowired
 	private AccountService accountService;
 
