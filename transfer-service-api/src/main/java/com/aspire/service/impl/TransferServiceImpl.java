@@ -92,6 +92,7 @@ public class TransferServiceImpl implements TransferService {
 	 */
 	private boolean transferValidation(Account fromAccount, Account toAccount,
 			long amountToTransfer, String message) {
+		
 		// Validate to account is active
 		boolean isToAccountActive = toAccount.getStatus() == AccountStatus.ACTIVE
 				.getValue();
@@ -103,6 +104,8 @@ public class TransferServiceImpl implements TransferService {
 			message = "From account is invalid";
 		} else if (fromAccount.getBalance() < amountToTransfer) {
 			message = "Account has insufficient balance";
+		} else if (amountToTransfer <= 0){
+			message = "Invalid amount";
 		}
 		boolean isValid = message == null;
 		return isValid;

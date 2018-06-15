@@ -30,7 +30,8 @@ public class AuthenticationFilter implements javax.servlet.Filter {
 
 			// Setting this hard coded value as true for now. The actual
 			// implementation will call authentication service and return back
-			// boolean saying whether the authentication true or false.
+			// boolean saying whether the authentication is true or false. Not
+			// implemented the entire logic here.
 			boolean authenticationStatus = true;
 			if (authenticationStatus) {
 				filter.doFilter(request, response);
